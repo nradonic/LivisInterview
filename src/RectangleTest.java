@@ -18,5 +18,6 @@ public class RectangleTest {
         Rectangle r1 = new Rectangle(5, 4);
         Rectangle r2 = new Rectangle(4, 5);
         assertTrue(r1.compareTo(r2)== 0);
+        assertTrue(r1.area()==19);
     }
 }
