@@ -170,6 +170,12 @@
     </dirset>
   </path>
   
+  <path id="livisinterview.module.test.sourcepath">
+    <dirset dir="${module.livisinterview.basedir}">
+      <include name="tests"/>
+    </dirset>
+  </path>
+  
   
   <target name="compile.module.livisinterview" depends="compile.module.livisinterview.production,compile.module.livisinterview.tests" description="Compile module LivisInterview"/>
   
@@ -191,7 +197,23 @@
     </copy>
   </target>
   
-  <target name="compile.module.livisinterview.tests" depends="register.custom.compilers,compile.module.livisinterview.production" description="compile module LivisInterview; test classes" unless="skip.tests"/>
+  <target name="compile.module.livisinterview.tests" depends="register.custom.compilers,compile.module.livisinterview.production" description="compile module LivisInterview; test classes" unless="skip.tests">
+    <mkdir dir="${livisinterview.testoutput.dir}"/>
+    <javac2 destdir="${livisinterview.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.livisinterview}/javac">
+      <compilerarg line="${compiler.args.livisinterview}"/>
+      <bootclasspath refid="livisinterview.module.bootclasspath"/>
+      <classpath refid="livisinterview.module.classpath"/>
+      <src refid="livisinterview.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.livisinterview"/>
+    </javac2>
+    
+    <copy todir="${livisinterview.testoutput.dir}">
+      <fileset dir="${module.livisinterview.basedir}/tests">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
   
   <target name="clean.module.livisinterview" description="cleanup module">
     <delete dir="${livisinterview.output.dir}"/>
