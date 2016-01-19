@@ -238,8 +238,5 @@
         <pathelement location="staging"/>
       </classpath>
     </junit>
-
-  <target/>
-
-
+  </target>
 </project>
