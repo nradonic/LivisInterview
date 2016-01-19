@@ -229,4 +229,17 @@
   <target name="build.modules" depends="init, clean, compile.module.livisinterview" description="build all modules"/>
   
   <target name="all" depends="build.modules" description="build all"/>
+
+  <target name="runjunit" depends="compile.module.livisinterview.tests">
+    <junit printsummary="on">
+      <test name="run.junit.tests"/>
+      <classpath >
+        <pathelement location="../out/test/LivisInterview/RectangleTest.class"/>
+        <pathelement location="staging"/>
+      </classpath>
+    </junit>
+
+  <target/>
+
+
 </project>
